@@ -39,7 +39,7 @@ function addBookToLibrary(book) {
     const removeButton = document.createElement('button');
     removeButton.id = 'remove';
 
-    removeButton.addEventListener('click', function() {xs
+    removeButton.addEventListener('click', function() {
         button = document.getElementById(this.id);
         book = button.parentElement.parentElement;
         book.remove();
