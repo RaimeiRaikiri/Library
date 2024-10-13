@@ -81,3 +81,11 @@ function addBookToLibrary(book) {
 function removeBookFromLibrary(index){
     myLibrary.splice(index, 1);
 }
+
+
+
+
+function togglePopup() {
+    const overlay = document.getElementById('popup-overlay');
+    overlay.classList.toggle('show');
+}
