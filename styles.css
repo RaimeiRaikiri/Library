@@ -5,6 +5,7 @@
 }
 body {
     height: 200vh; 
+    background-color: #0B0C10;
 }
 nav {
     display: grid;
@@ -16,6 +17,9 @@ nav {
     border-bottom: 1px solid black;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
+
+    background-color: #0B0C10;
+    color: #66FCF1;
 }
 .title {
     justify-self: center;
@@ -24,12 +28,18 @@ nav {
     margin-top: 10px;
     justify-self: center;
 }
+.addBook{
+    color: #66FCF1;
+    border: 1px solid #66FCF1;
+
+}
 .icon {
     justify-self: center;
     align-self:end;
 }
 h1 {
-    font-size: 30px;
+    font-size: 46px;
+    text-shadow: #66FCF1 0 0 4px ;
 }
 .books-section {
     display: grid;
@@ -45,16 +55,19 @@ h1 {
 }
 
 .addBook {
-    width: 50px;
+    width: 140px;
     height: 50px;
-    border: none;
+
+    color: #66FCF1;
+    border: 1px solid #66FCF1;
     background: none;
-    background-image: url(./imgs/plus-box-icon.svg);
+    border-radius: 8px;
+    
 }
 .addBook:hover {
-    background-image: url(./imgs/hover-plus-box.svg);
+    box-shadow: 0 0 4px 2px #66FCF1;
+    text-shadow: #66FCF1 0 0 10px ;
 }
-
 
 
 .book {
@@ -65,10 +78,10 @@ h1 {
 
     display: grid;
     grid-template-rows: 4fr 1fr;
-  }
-  .book:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
+}
+.book:hover {
+    box-shadow: 0 0 20px 15px #66FCF1;
+}
 .button-section{
     justify-self: center;
     align-self: center;
@@ -81,7 +94,9 @@ h1 {
     justify-self: center;
     align-self: center;
     text-align: center;
+
 }
+
 
 .remove {
     width: 50px;
