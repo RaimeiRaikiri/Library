@@ -1,5 +1,6 @@
 const myLibrary = [];
-//let lastRemovedBookIndex = 
+let bookCounter = 0;
+let lastRemovedBookIndex = -1;
 
 function Book(title, author, pages, read, yearPublished) {
     this.title = title;
@@ -15,12 +16,20 @@ const book1 = new Book('Fey Evolution Merchant', 'Amber Button', 3200, false, 20
 
 addToLibraryButton.addEventListener('click', () => addBookToLibrary(book1));
 
-// .children
+function updateBookIndex(index)
+{
+    let books = bookSection.children;
+    for (let i = index; i < myLibrary.length; i++)
+    {
+        books[i].dataset.bookNum = books[i].dataset.bookNum - 1;
+    }
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
     const currentBook = document.createElement('div');
     currentBook.classList.add('book');
-    //currentBook.dataset.bookNum = myLibrary.indexOf(book);
+    currentBook.dataset.bookNum = bookCounter;
     
     const headings = document.createElement('div');
     headings.classList.add('heading-section');
@@ -42,7 +51,13 @@ function addBookToLibrary(book) {
     removeButton.addEventListener('click', function() {
         button = document.getElementById(this.id);
         book = button.parentElement.parentElement;
+        index = book.dataset.bookNum;
         book.remove();
+        bookCounter--;
+        lastRemovedBookIndex = index;
+        
+        removeBookFromLibrary(index);
+        updateBookIndex(index);
     });
 
     const markReadButton = document.createElement('button');
@@ -60,13 +75,9 @@ function addBookToLibrary(book) {
 
 
     bookSection.appendChild(currentBook);
+    bookCounter++;
 }
 
-function removeBookFromLibrary(book){
-   
-    if (Number(index) !== -1)
-    {
-        myLibrary.splice(index, 1);
-        bookCount--;
-    }
+function removeBookFromLibrary(index){
+    myLibrary.splice(index, 1);
 }
