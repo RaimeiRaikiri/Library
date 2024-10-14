@@ -41,6 +41,82 @@ function addBookToLibrary(book) {
     const currentBook = document.createElement('div');
     currentBook.classList.add('book');
     currentBook.dataset.bookNum = bookCounter;
+
+    const innerLayer = document.createElement('div');
+    innerLayer.classList.add('inner-layer');
+    innerLayer.dataset.flipped = false;
+
+    currentBook.addEventListener('click', ()=> {
+    if (innerLayer.dataset.flipped === 'false')
+        {
+            innerLayer.style.cssText = 'transform: rotateY(180deg)';
+            innerLayer.dataset.flipped = true;
+    
+        }
+        else if (innerLayer.dataset.flipped === 'true')
+        {
+            innerLayer.dataset.flipped = false;
+            innerLayer.style.cssText = 'transform: rotateY(360deg)';
+        }
+    });
+    // Back of book card
+    const back = document.createElement('div');
+    back.classList.add('back');
+    
+    const rightSide =  document.createElement('div');
+    rightSide.classList.add('right-side');
+    const leftSide = document.createElement('div');
+    leftSide.classList.add('left-side');
+
+   let leftDiv1 = document.createElement('div');
+   let leftDiv2 = document.createElement('div');
+   let leftDiv3 = document.createElement('div');
+   let leftDiv4 = document.createElement('div');
+   let leftDiv5 = document.createElement('div');
+
+   leftDiv1.textContent = 'Title: ';
+   leftDiv2.textContent = 'Author: ';
+   leftDiv3.textContent = 'Published: ';
+   leftDiv4.textContent = 'No. of pages: ';
+   leftDiv5.textContent = 'Read: ';
+
+   let rightDiv1 = document.createElement('div');
+   let rightDiv2 = document.createElement('div');
+   let rightDiv3 = document.createElement('div');
+   let rightDiv4 = document.createElement('div');
+   let rightDiv5 = document.createElement('div');
+
+   rightDiv1.textContent = book.title;
+   rightDiv2.textContent = book.author;
+   rightDiv3.textContent = book.yearPublished;
+   rightDiv4.textContent = book.pages;
+
+   if (book.read)
+   {
+       rightDiv5.textContent = 'Read';
+   }
+   else {
+    rightDiv5.textContent = 'Unread';
+   }
+   
+   leftSide.appendChild(leftDiv1);
+   leftSide.appendChild(leftDiv2);
+   leftSide.appendChild(leftDiv3);
+   leftSide.appendChild(leftDiv4);
+   leftSide.appendChild(leftDiv5);
+
+   rightSide.appendChild(rightDiv1);
+   rightSide.appendChild(rightDiv2);
+   rightSide.appendChild(rightDiv3);
+   rightSide.appendChild(rightDiv4);
+   rightSide.appendChild(rightDiv5);
+
+   back.appendChild(leftSide);
+    back.appendChild(rightSide);
+    
+    // Front of book card
+    const front = document.createElement('div');
+    front.classList.add('front');
     
     const headings = document.createElement('div');
     headings.classList.add('heading-section');
@@ -63,17 +139,22 @@ function addBookToLibrary(book) {
     markReadButton.classList.add('read');
     markReadButton.dataset.read = 'false';
 
-    markReadButton.addEventListener('click', ()=> {
+    markReadButton.addEventListener('click', (event)=> {
         if (markReadButton.dataset.read === 'false')
             {
                 markReadButton.style.cssText = 'background-image: url(./imgs/read-hover.svg)';
                 markReadButton.dataset.read = 'true';
+                rightDiv5.textContent = 'Read';
+
             }
             else if (markReadButton.dataset.read === 'true')
             {
                 markReadButton.style.cssText = 'background-image: url(./imgs/read.svg)';
                 markReadButton.dataset.read = 'false';
+                rightDiv5.textContent = 'Unread';
+
             }
+        event.stopPropagation();
     });
     
     if (book.read)
@@ -88,12 +169,16 @@ function addBookToLibrary(book) {
     buttons.appendChild(removeButton);
     buttons.appendChild(markReadButton);
     
+    front.appendChild(headings);
+    front.appendChild(buttons);
     
-    currentBook.appendChild(headings);
-    currentBook.appendChild(buttons);
-    
+    innerLayer.appendChild(front);
+    innerLayer.appendChild(back);
+
+    currentBook.appendChild(innerLayer);
     
     bookSection.appendChild(currentBook);
+
     bookCounter++;
 
     removeButton.addEventListener('click', function() {
@@ -140,21 +225,3 @@ form.addEventListener('submit', (e)=> {
 
 
 
-const testBook = document.querySelector('.book');
-const back= document.querySelector('.back');
-const flipper = document.querySelector('.inner-layer');
-flipper.dataset.flipped = false;
-testBook.addEventListener('click', ()=> {
-    if (flipper.dataset.flipped === 'false')
-    {
-        flipper.style.cssText = 'transform: rotateY(180deg)';
-        flipper.dataset.flipped = true;
-
-    }
-    else if (flipper.dataset.flipped === 'true')
-    {
-        flipper.dataset.flipped = false;
-        flipper.style.cssText = 'transform: rotateY(360deg)';
-    }
-
-})
