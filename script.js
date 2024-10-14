@@ -59,24 +59,28 @@ function addBookToLibrary(book) {
     const removeButton = document.createElement('button');
     removeButton.id = 'remove';
 
-    
     const markReadButton = document.createElement('button');
     markReadButton.classList.add('read');
     markReadButton.dataset.read = 'false';
 
     markReadButton.addEventListener('click', ()=> {
         if (markReadButton.dataset.read === 'false')
-        {
-            markReadButton.style.cssText = 'background-image: url(./imgs/read-hover.svg)';
-            markReadButton.dataset.read = 'true';
-        }
-        else if (markReadButton.dataset.read === 'true')
-        {
-            markReadButton.style.cssText = 'background-image: url(./imgs/read.svg)';
-            markReadButton.dataset.read = 'false';
-        }
-
-    })
+            {
+                markReadButton.style.cssText = 'background-image: url(./imgs/read-hover.svg)';
+                markReadButton.dataset.read = 'true';
+            }
+            else if (markReadButton.dataset.read === 'true')
+            {
+                markReadButton.style.cssText = 'background-image: url(./imgs/read.svg)';
+                markReadButton.dataset.read = 'false';
+            }
+    });
+    
+    if (book.read)
+    {
+        markReadButton.style.cssText = 'background-image: url(./imgs/read-hover.svg)';
+        markReadButton.dataset.read = 'true';
+    }
     
     headings.appendChild(bookTitle);
     headings.appendChild(authorName);
@@ -108,9 +112,6 @@ function removeBookFromLibrary(index){
     myLibrary.splice(index, 1);
 }
 
-
-
-
 function togglePopup() {
     const overlay = document.getElementById('popup-overlay');
     overlay.classList.toggle('show');
@@ -125,9 +126,9 @@ form.addEventListener('submit', (e)=> {
     let bookAuthor = document.querySelector('#Author');
     let publishYear = document.querySelector('#Publish');
     let pages = document.querySelector('#Pages');
-    let read = document.querySelector('#Read-Book');
+    let read = document.querySelector('#Read-Book').checked;
 
-    const newBook = new Book(bookName.value, bookAuthor.value, pages.value, read.value, publishYear.value);
+    const newBook = new Book(bookName.value, bookAuthor.value, pages.value, read, publishYear.value);
     addBookToLibrary(newBook);
     togglePopup();
 
