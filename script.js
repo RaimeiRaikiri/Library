@@ -135,3 +135,26 @@ form.addEventListener('submit', (e)=> {
     form.reset();
 });
 
+
+
+
+
+
+const testBook = document.querySelector('.book');
+const back= document.querySelector('.back');
+const flipper = document.querySelector('.inner-layer');
+flipper.dataset.flipped = false;
+testBook.addEventListener('click', ()=> {
+    if (flipper.dataset.flipped === 'false')
+    {
+        flipper.style.cssText = 'transform: rotateY(180deg)';
+        flipper.dataset.flipped = true;
+
+    }
+    else if (flipper.dataset.flipped === 'true')
+    {
+        flipper.dataset.flipped = false;
+        flipper.style.cssText = 'transform: rotateY(360deg)';
+    }
+
+})

@@ -4,7 +4,7 @@
     box-sizing: border-box;  
 }
 body {
-    height: 200vh; 
+    height: 100vh; 
     background-color: #0B0C10;
 }
 nav {
@@ -76,8 +76,6 @@ h1 {
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
 
-    display: grid;
-    grid-template-rows: 4fr 1fr;
 }
 .book:hover {
     box-shadow: 0 0 20px 15px #66FCF1;
@@ -176,4 +174,31 @@ h1 {
 #popup-overlay.show {
     display: flex;
     opacity: 1;
+}
+
+
+
+
+.inner-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.back{
+  transform: rotateY(180deg);
+}
+.front{
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+}
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
 }
