@@ -62,6 +62,21 @@ function addBookToLibrary(book) {
     
     const markReadButton = document.createElement('button');
     markReadButton.classList.add('read');
+    markReadButton.dataset.read = 'false';
+
+    markReadButton.addEventListener('click', ()=> {
+        if (markReadButton.dataset.read === 'false')
+        {
+            markReadButton.style.cssText = 'background-image: url(./imgs/read-hover.svg)';
+            markReadButton.dataset.read = 'true';
+        }
+        else if (markReadButton.dataset.read === 'true')
+        {
+            markReadButton.style.cssText = 'background-image: url(./imgs/read.svg)';
+            markReadButton.dataset.read = 'false';
+        }
+
+    })
     
     headings.appendChild(bookTitle);
     headings.appendChild(authorName);
@@ -118,3 +133,4 @@ form.addEventListener('submit', (e)=> {
 
     form.reset();
 });
+
