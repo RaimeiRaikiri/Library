@@ -1,4 +1,7 @@
+// Stores all objects
 const myLibrary = [];
+
+// Used to make sure the books datasets always match the index of the myLibrary array
 let bookCounter = 0;
 let lastRemovedBookIndex = -1;
 
@@ -9,12 +12,20 @@ function Book(title, author, pages, read, yearPublished) {
     this.read = read;
     this.yearPublished = yearPublished;
 }
+
 const bookSection = document.querySelector('.books-section');
 
 const addToLibraryButton = document.querySelector('.addBook');
-const book1 = new Book('Fey Evolution Merchant', 'Amber Button', 3200, false, 2004);
 
-addToLibraryButton.addEventListener('click', () => addBookToLibrary(book1));
+const book1 = new Book('Fey Evolution Merchant', 'Amber Button', 3200, false, 2020);
+const book2 = new Book('Supreme Lord: I can extract everything!', 'HideousGrain', 1024, false, 2023);
+const book3 = new Book("Atticus's Odyssey: Reincarnated Into A Playground", 'RealmWeaver', 745, false, 2023);
+
+// Adding 3 preadded books
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
+
 
 function updateBookIndex(index)
 {
@@ -48,34 +59,34 @@ function addBookToLibrary(book) {
     const removeButton = document.createElement('button');
     removeButton.id = 'remove';
 
+    
+    const markReadButton = document.createElement('button');
+    markReadButton.classList.add('read');
+    
+    headings.appendChild(bookTitle);
+    headings.appendChild(authorName);
+    
+    buttons.appendChild(removeButton);
+    buttons.appendChild(markReadButton);
+    
+    
+    currentBook.appendChild(headings);
+    currentBook.appendChild(buttons);
+    
+    
+    bookSection.appendChild(currentBook);
+    bookCounter++;
+
     removeButton.addEventListener('click', function() {
-        button = document.getElementById(this.id);
-        book = button.parentElement.parentElement;
-        index = book.dataset.bookNum;
-        book.remove();
+
+        index = currentBook.dataset.bookNum;
+        currentBook.remove();
         bookCounter--;
         lastRemovedBookIndex = index;
         
         removeBookFromLibrary(index);
         updateBookIndex(index);
     });
-
-    const markReadButton = document.createElement('button');
-    markReadButton.classList.add('read');
-
-    headings.appendChild(bookTitle);
-    headings.appendChild(authorName);
-
-    buttons.appendChild(removeButton);
-    buttons.appendChild(markReadButton);
-
-
-    currentBook.appendChild(headings);
-    currentBook.appendChild(buttons);
-
-
-    bookSection.appendChild(currentBook);
-    bookCounter++;
 }
 
 function removeBookFromLibrary(index){
@@ -89,3 +100,21 @@ function togglePopup() {
     const overlay = document.getElementById('popup-overlay');
     overlay.classList.toggle('show');
 }
+
+
+const form = document.querySelector('.add-book');
+form.addEventListener('submit', (e)=> {
+    e.preventDefault();
+
+    let bookName = document.querySelector('#Title');
+    let bookAuthor = document.querySelector('#Author');
+    let publishYear = document.querySelector('#Publish');
+    let pages = document.querySelector('#Pages');
+    let read = document.querySelector('#Read-Book');
+
+    const newBook = new Book(bookName.value, bookAuthor.value, pages.value, read.value, publishYear.value);
+    addBookToLibrary(newBook);
+    togglePopup();
+
+    form.reset();
+});
