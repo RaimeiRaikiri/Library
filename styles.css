@@ -173,7 +173,15 @@ h1 {
     display: flex;
     opacity: 1;
 }
-
+.submit, .close {
+    border-radius: 60px;
+    width: 100px;
+    height: 40px;
+    background: none;
+}
+.submit {
+    margin-bottom: 30px;
+}
 
 .inner-layer {
   position: relative;
