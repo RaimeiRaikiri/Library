@@ -5,12 +5,15 @@ const myLibrary = [];
 let bookCounter = 0;
 let lastRemovedBookIndex = -1;
 
-function Book(title, author, pages, read, yearPublished) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.yearPublished = yearPublished;
+class Book {
+    constructor(title, author, pages, read, yearPublished)
+    {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.yearPublished = yearPublished;
+    }
 }
 
 const bookSection = document.querySelector('.books-section');
